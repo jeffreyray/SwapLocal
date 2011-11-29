@@ -66,6 +66,7 @@
 			<filename>access.xml</filename>
 			<filename>swaplocal.php</filename>
 			<filename>controller.php</filename>
+			<folder>language</folder>
 			<!-- SQL files section -->
 			<folder>sql</folder>
 			<!-- tables files section -->

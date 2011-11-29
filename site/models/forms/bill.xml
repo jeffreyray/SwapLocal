@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id: weblink.xml 20990 2011-03-18 16:42:30Z infograf768 $ -->
+<form>
+	<fieldset name="details">
+		<field
+			name="id"
+			type="hidden"
+		/>
+		<field
+			name="currency"
+			type="currency"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_BILL_FIELD_CURRENCY_LABEL"
+			description="COM_SWAPLOCAL_BILL_FIELD_CURRENCY_DESC"
+			required="true"
+		/>
+		<field
+			name="denom"
+			type="denomination"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_BILL_FIELD_DENOM_LABEL"
+			description="COM_SWAPLOCAL_BILL_FIELD_DENOM_DESC"
+			required="true"
+		/>
+		<field
+			name="series"
+			type="series"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_BILL_FIELD_SERIES_LABEL"
+			description="COM_SWAPLOCAL_BILL_FIELD_SERIES_DESC"
+			required="true"
+		/>
+		<field
+			name="serial"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_BILL_FIELD_SERIAL_LABEL"
+			description="COM_SWAPLOCAL_BILL_FIELD_SERIAL_DESC"
+			required="true"
+		/>
+	</fieldset>
+</form>

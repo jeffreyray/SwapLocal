@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id: helloworld.xml 74 2010-12-01 22:04:52Z chdemko $ -->
+<form
+	addrulepath="/administrator/components/com_swaplocal/models/rules"
+>
+	<fieldset name="details">
+		<field
+			name="id"
+			type="hidden"
+		/>
+		<field
+			name="timestamp"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_SWAP_FIELD_TIMESTAMP_LABEL"
+			description="COM_SWAPLOCAL_SWAP_FIELD_TIMESTAMP_DESC"
+			required="true"
+		/>
+		<field
+			name="bill"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_SWAP_FIELD_BILL_LABEL"
+			description="COM_SWAPLOCAL_SWAP_FIELD_BILL_DESC"
+			required="true"
+		/>
+		<field
+			name="business"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_SWAP_FIELD_BUSINESS_LABEL"
+			description="COM_SWAPLOCAL_SWAP_FIELD_BUSINESS_DESC"
+			required="true"
+		/>
+		<field
+			name="traveltime"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_SWAP_FIELD_TRAVELTIME_LABEL"
+			description="COM_SWAPLOCAL_SWAP_FIELD_TRAVELTIME_DESC"
+			required="true"
+		/>
+		<field
+			name="traveldist"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_SWAP_FIELD_TRAVELDIST_LABEL"
+			description="COM_SWAPLOCAL_SWAP_FIELD_TRAVELDIST_DESC"
+			required="true"
+		/>
+		<field
+			name="note"
+			type="text"
+			extension="com_swaplocal"
+			class="inputbox"
+			default=""
+			label="COM_SWAPLOCAL_SWAP_FIELD_NOTE_LABEL"
+			description="COM_SWAPLOCAL_SWAP_FIELD_NOTE_DESC"
+			required="true"
+		/>
+	</fieldset>
+	<fields name="params">
+
+	</fields>
+</form>
+

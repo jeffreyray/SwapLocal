@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="SwapLocal Group Layout">
+		<message>
+			<![CDATA[SwapLocal Group Layout]]>
+		</message>
+	</layout>
+	<state>
+		<name>SwapLocal  Group Layout</name>
+		<description>SwapLocal Group Layout</description>
+		<url addpath="/administrator/components/com_swaplocal/elements">
+			<param name="cid" scope="com_swaplocal" default="0" type="group" label="Group" description="Choose a group..." />
+		</url>
+	</state>
+</metadata>

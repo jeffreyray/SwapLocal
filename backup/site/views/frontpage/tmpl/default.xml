@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout
+		title="com_swaplocal_frontpage_default_title" option="com_swaplocal_frontpage_default_option">
+		<help
+			key="JHELP_MENUS_MENU_ITEM_SWAPLOCAL_SUBMIT"
+		/>
+		<message>
+			<![CDATA[com_swaplocal_bill_frontpage_desc]]>
+		</message>
+	</layout>
+</metadata>
+
+

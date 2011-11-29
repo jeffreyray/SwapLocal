@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="SwapLocal Business Layout">
+		<message>
+			<![CDATA[SwapLocal Business Layout]]>
+		</message>
+	</layout>
+	<state>
+		<name>SwapLocal Business Layout</name>
+		<description>SwapLocal Business Layout</description>
+	</state>
+</metadata>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="SwapLocal Groups Index">
+		<message>
+			<![CDATA[SwapLocal Groups Index]]>
+		</message>
+	</layout>
+	<state>
+		<name>SwapLocal Groups Index</name>
+		<description>SwapLocal Groups Index</description>
+		<params>
+			<param name="columns" type="text" label="Columns" description="The number of columns to display"/>
+		</params>
+	</state>
+</metadata>

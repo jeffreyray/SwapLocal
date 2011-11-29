@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<extension type="component" version="1.6.0" method="upgrade">
+ 
+	<name>SwapLocal</name>
+	<!-- The following elements are optional and free of formatting constraints -->
+	<creationDate>November 2011</creationDate>
+	<author>Jeffrey Ray</author>
+	<authorEmail>jeffrey.hallock@gmail.com</authorEmail>
+	<authorUrl>http://chronosoft.info</authorUrl>
+	<copyright>GPL</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.0.1</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>Track commerce in your community</description>
+ 
+	<update> <!-- Runs on update; New in 1.6 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+ 
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+		to copy FROM in the package to install therefore files copied
+		in this section are copied from /site/ in the package -->
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>swaplocal.php</filename>
+		<filename>controller.php</filename>
+		<folder>controllers</folder>
+		<folder>assets</folder>
+		<folder>views</folder>
+		<folder>models</folder>
+	</files>
+	
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu>SwapLocal</menu>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+			in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>controller.php</filename>
+			<filename>admin.swaplocal.php</filename>
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>elements</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<folder>sql</folder>
+		</files>
+	</administration>
+ 
+</extension>

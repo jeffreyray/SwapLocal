@@ -1,0 +1,38 @@
+
+
+.swaplocal-form-section {
+	border: solid thin #C4E69C;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	padding: 3px 6px;
+}
+
+.swaplocal-form-section .swaplocal-form-label {
+	border: solid thin #C4E69C;
+	position: relative;
+	background: white;
+	left: 15px;
+	top: -15px;
+	width: auto;
+	padding: 0px 10px;
+}
+
+.swaplocal-itemlist {
+	width: 100%;
+	border-spacing: 5px;
+}
+
+.swaplocal-itemlist th {
+	text-align: left;
+	font-weight: bold;
+	margin-bottom: 5px;
+	border-bottom: solid thin #C4E69C;
+	color: #669900;
+	font-size: larger;
+	padding: 3px;
+}
+
+
+.swaplocal-itemlist td {
+	padding: 3px;
+}

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- $Id: default.xml 74 2010-12-01 22:04:52Z chdemko $ -->
-<metadata>
-	<layout title="COM_SWAPLOCAL_SWAP_VIEW_FIND_TITLE">
-		<message>COM_SWAPLOCAL_SWAP_VIEW_FIND_DESC</message>
-	</layout>
-</metadata>
-

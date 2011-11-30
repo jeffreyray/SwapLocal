@@ -1,35 +1,23 @@
 <?php
-
 /**
- * @version		$Id: hello.php 15 2009-11-02 18:37:15Z chdemko $
- * @package		Joomla16.Tutorials
- * @subpackage	Components
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
- * @author		Christophe Demko
- * @link		http://joomlacode.org/gf/project/helloworld_1_6/
- * @license		License GNU General Public License version 2 or later
+ * @version		$Id: swaplocal.php 20196 2011-01-09 02:40:25Z ian $
+ * @package		Joomla.Administrator
+ * @subpackage	com_swaplocal
+ * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+// no direct access
+defined('_JEXEC') or die;
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_swaplocal')) 
-{
+if (!JFactory::getUser()->authorise('core.manage', 'com_swaplocal')) {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-// require helper file
-JLoader::register('SwapLocalHelper', dirname(__FILE__) . DS . 'helpers' . DS . 'swaplocal.php');
-
-// import joomla controller library
+// Include dependencies
 jimport('joomla.application.component.controller');
 
-// Get an instance of the controller prefixed by SwapLocal
 $controller = JController::getInstance('SwapLocal');
-
-// Perform the Request task
 $controller->execute(JRequest::getCmd('task'));
-
-// Redirect if set by the controller
 $controller->redirect();

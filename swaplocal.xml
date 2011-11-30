@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id: swaplocal.xml 14 2009-11-02 18:35:20Z chdemko $ -->
-<extension type="component" version="1.6.0" method="upgrade">
-
-	<name>COM_SWAPLOCAL</name>
-	<!-- The following elements are optional and free of formatting conttraints -->
-	<creationDate>November 2011</creationDate>
+<!-- $Id: swaplocal.xml 21505 2011-06-10 07:21:09Z infograf768 $ -->
+<extension type="component" version="1.7" method="upgrade">
+	<name>com_swaplocal</name>
 	<author>Jeffrey Ray</author>
+	<creationDate>Nov 2011</creationDate>
+	<copyright>
+	Copyright (C) 2011 Jeffrey Ray. All rights reserved.
+	Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.
+	</copyright>
+	
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<authorEmail>jeffrey.hallock@gmail.com</authorEmail>
-	<authorUrl>http://www.chronosoft.info</authorUrl>
-	<copyright>(C) 2011 Jeffrey Ray</copyright>
-	<license>GPL</license>
-	<!--  The version string is recorded in the components table -->
-	<version>0.1.00</version>
-	<!-- The description is optional and defaults to the name -->
-	<description>COM_SWAPLOCAL_DESCRIPTION</description>
-
-	<!-- Runs on install/uninstall/update; New in 1.6 -->
-	<scriptfile>script.php</scriptfile>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>0.1.6</version>
+	<description>COM_SWAPLOCAL_XML_DESCRIPTION</description>
+	
 
 	<install> <!-- Runs on install -->
 		<sql>
@@ -34,58 +32,36 @@
 		</schemas>
 	</update>
 
-	<!-- Site Main File Copy Section -->
-	<!-- Note the folder attribute: This attribute describes the folder
-		to copy FROM in the package to install therefore files copied
-		in this section are copied from /site/ in the package -->
 	<files folder="site">
-		<filename>index.html</filename>
 		<filename>swaplocal.php</filename>
 		<filename>controller.php</filename>
-		<folder>views</folder>
+		<filename>index.html</filename>
+		<folder>helpers</folder>
 		<folder>models</folder>
-		<folder>language</folder>
 	</files>
 
-	<media destination="com_swaplocal" folder="media">
-		<filename>index.html</filename>
-		<folder>images</folder>
-	</media>
-
 	<administration>
-		<!-- Administration Menu Section -->
-		<menu img="../media/com_swaplocal/images/tux-16x16.png">COM_SWAPLOCAL_MENU</menu>
-		<!-- Administration Main File Copy Section -->
-		<!-- Note the folder attribute: This attribute describes the folder
-			to copy FROM in the package to install therefore files copied
-			in this section are copied from /admin/ in the package -->
 		<files folder="admin">
-			<!-- Admin Main File Copy Section -->
-			<filename>index.html</filename>
-			<filename>config.xml</filename>
 			<filename>access.xml</filename>
+			<filename>config.xml</filename>
 			<filename>swaplocal.php</filename>
 			<filename>controller.php</filename>
-			<folder>language</folder>
-			<!-- SQL files section -->
-			<folder>sql</folder>
-			<!-- tables files section -->
-			<folder>tables</folder>
-			<!-- models files section -->
-			<folder>models</folder>
-			<!-- views files section -->
-			<folder>views</folder>
-			<!-- controllers files section -->
+			<filename>index.html</filename>
 			<folder>controllers</folder>
-			<!-- helpers files section -->
+			<folder>elements</folder>
 			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
 		</files>
-
+		
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_swaplocal.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_swaplocal.sys.ini</language>
 		</languages>
-	</administration>
 
+	</administration>
 </extension>
+
 

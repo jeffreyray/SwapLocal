@@ -1,71 +1,99 @@
 <?php
+/**
+ * @version		$Id: view.html.php 22355 2011-11-07 05:11:58Z github_bot $
+ * @package		Joomla.Administrator
+ * @subpackage	com_swaplocal
+ * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
-defined('_JEXEC') or die('Restricted access');
+// No direct access
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
+/**
+ * View class for a list of businesses.
+ *
+ * @package		Joomla.Administrator
+ * @subpackage	com_swaplocal
+ * @since		1.6
+ */
 class SwapLocalViewBusinesses extends JView
 {
+	protected $items;
+	protected $pagination;
+	protected $state;
 
-	function display($tpl = null) 
+	/**
+	 * Display the view
+	 *
+	 * @return	void
+	 */
+	public function display($tpl = null)
 	{
-		// Get data from the model
-		$items = $this->get('Items');
-		$pagination = $this->get('Pagination');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
+		$this->authors		= $this->get('Authors');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) 
-		{
-			JError::raiseError(500, implode('<br />', $errors));
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-		// Assign data to the view
-		$this->items = $items;
-		$this->pagination = $pagination;
 
-		// Set the toolbar
-		$this->addToolBar();
+		// We don't need toolbar in the modal window.
+		if ($this->getLayout() !== 'modal') {
+			$this->addToolbar();
+		}
 
-		// Display the template
 		parent::display($tpl);
-
-		// Set the document
-		$this->setDocument();
 	}
 
 	/**
-	 * Setting the toolbar
-	 */
-	protected function addToolBar() 
-	{
-		$canDo = SwapLocalHelper::getActions();
-		JToolBarHelper::title(JText::_('COM_SWAPLOCAL_MANAGER_BUSINESSES'), 'swaplocal');
-		if ($canDo->get('core.create')) 
-		{
-			JToolBarHelper::addNew('business.add', 'JTOOLBAR_NEW');
-		}
-		if ($canDo->get('core.edit')) 
-		{
-			JToolBarHelper::editList('business.edit', 'JTOOLBAR_EDIT');
-		}
-		if ($canDo->get('core.delete')) 
-		{
-			JToolBarHelper::deleteList('', 'business.delete', 'JTOOLBAR_DELETE');
-		}
-		if ($canDo->get('core.admin')) 
-		{
-			JToolBarHelper::divider();
-			JToolBarHelper::preferences('com_swaplocal');
-		}
-	}
-	/**
-	 * Method to set up the document properties
+	 * Add the page title and toolbar.
 	 *
-	 * @return void
+	 * @since	1.6
 	 */
-	protected function setDocument() 
+	protected function addToolbar()
 	{
-		$document = JFactory::getDocument();
-		$document->setTitle(JText::_('COM_SWAPLOCAL_ADMINISTRATION'));
+		$canDo	= SwapLocalHelper::getActions($this->state->get('filter.category_id'));
+		$user		= JFactory::getUser();
+		JToolBarHelper::title(JText::_('COM_SWAPLOCAL_BUSINESSES_TITLE'), 'business.png');
+
+		if ($canDo->get('core.create') || (count($user->getAuthorisedCategories('com_swaplocal', 'core.create'))) > 0 ) {
+			JToolBarHelper::addNew('business.add');
+		}
+
+		if (($canDo->get('core.edit')) || ($canDo->get('core.edit.own'))) {
+			JToolBarHelper::editList('business.edit');
+		}
+
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::publish('businesses.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::unpublish('businesses.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::custom('businesses.featured', 'featured.png', 'featured_f2.png', 'JFEATURED', true);
+			JToolBarHelper::divider();
+			JToolBarHelper::archiveList('businesses.archive');
+			JToolBarHelper::checkin('businesses.checkin');
+		}
+
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'businesses.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
+		}
+		elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('businesses.trash');
+			JToolBarHelper::divider();
+		}
+
+		if ($canDo->get('core.admin')) {
+			JToolBarHelper::preferences('com_swaplocal');
+			JToolBarHelper::divider();
+		}
+
+		JToolBarHelper::help('JHELP_swaplocal_ARTICLE_MANAGER');
 	}
 }

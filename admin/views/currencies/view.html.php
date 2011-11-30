@@ -1,71 +1,99 @@
 <?php
+/**
+ * @version		$Id: view.html.php 22355 2011-11-07 05:11:58Z github_bot $
+ * @package		Joomla.Administrator
+ * @subpackage	com_swaplocal
+ * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
-defined('_JEXEC') or die('Restricted access');
+// No direct access
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
+/**
+ * View class for a list of currencies.
+ *
+ * @package		Joomla.Administrator
+ * @subpackage	com_swaplocal
+ * @since		1.6
+ */
 class SwapLocalViewCurrencies extends JView
 {
+	protected $items;
+	protected $pagination;
+	protected $state;
 
-	function display($tpl = null) 
+	/**
+	 * Display the view
+	 *
+	 * @return	void
+	 */
+	public function display($tpl = null)
 	{
-		// Get data from the model
-		$items = $this->get('Items');
-		$pagination = $this->get('Pagination');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
+		$this->authors		= $this->get('Authors');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) 
-		{
-			JError::raiseError(500, implode('<br />', $errors));
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-		// Assign data to the view
-		$this->items = $items;
-		$this->pagination = $pagination;
 
-		// Set the toolbar
-		$this->addToolBar();
+		// We don't need toolbar in the modal window.
+		if ($this->getLayout() !== 'modal') {
+			$this->addToolbar();
+		}
 
-		// Display the template
 		parent::display($tpl);
-
-		// Set the document
-		$this->setDocument();
 	}
 
 	/**
-	 * Setting the toolbar
-	 */
-	protected function addToolBar() 
-	{
-		$canDo = SwapLocalHelper::getActions();
-		JToolBarHelper::title(JText::_('COM_SWAPLOCAL_MANAGER_CURRENCIES'), 'swaplocal');
-		if ($canDo->get('core.create')) 
-		{
-			JToolBarHelper::addNew('currency.add', 'JTOOLBAR_NEW');
-		}
-		if ($canDo->get('core.edit')) 
-		{
-			JToolBarHelper::editList('currency.edit', 'JTOOLBAR_EDIT');
-		}
-		if ($canDo->get('core.delete')) 
-		{
-			JToolBarHelper::deleteList('', 'currency.delete', 'JTOOLBAR_DELETE');
-		}
-		if ($canDo->get('core.admin')) 
-		{
-			JToolBarHelper::divider();
-			JToolBarHelper::preferences('com_swaplocal');
-		}
-	}
-	/**
-	 * Method to set up the document properties
+	 * Add the page title and toolbar.
 	 *
-	 * @return void
+	 * @since	1.6
 	 */
-	protected function setDocument() 
+	protected function addToolbar()
 	{
-		$document = JFactory::getDocument();
-		$document->setTitle(JText::_('COM_SWAPLOCAL_ADMINISTRATION'));
+		$canDo	= SwapLocalHelper::getActions($this->state->get('filter.category_id'));
+		$user		= JFactory::getUser();
+		JToolBarHelper::title(JText::_('COM_SWAPLOCAL_CURRENCY_TITLE'), 'currency.png');
+
+		if ($canDo->get('core.create') || (count($user->getAuthorisedCategories('com_swaplocal', 'core.create'))) > 0 ) {
+			JToolBarHelper::addNew('currency.add');
+		}
+
+		if (($canDo->get('core.edit')) || ($canDo->get('core.edit.own'))) {
+			JToolBarHelper::editList('currency.edit');
+		}
+
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::publish('currencies.publish', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::unpublish('currencies.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::custom('currencies.featured', 'featured.png', 'featured_f2.png', 'JFEATURED', true);
+			JToolBarHelper::divider();
+			JToolBarHelper::archiveList('currencies.archive');
+			JToolBarHelper::checkin('currencies.checkin');
+		}
+
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'currencies.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
+		}
+		elseif ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('currencies.trash');
+			JToolBarHelper::divider();
+		}
+
+		if ($canDo->get('core.admin')) {
+			JToolBarHelper::preferences('com_swaplocal');
+			JToolBarHelper::divider();
+		}
+
+		JToolBarHelper::help('JHELP_swaplocal_ARTICLE_MANAGER');
 	}
 }

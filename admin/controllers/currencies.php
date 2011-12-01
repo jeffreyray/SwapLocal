@@ -44,7 +44,7 @@ class SwapLocalControllerCurrencies extends JControllerAdmin
 	 * @return	JModel
 	 * @since	1.6
 	 */
-	public function getModel($name = 'Currencies', $prefix = 'SwapLocalModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Currency', $prefix = 'SwapLocalModel', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 

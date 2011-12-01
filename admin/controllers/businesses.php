@@ -95,7 +95,7 @@ class SwapLocalControllerBusinesses extends JControllerAdmin
 	 * @return	JModel
 	 * @since	1.6
 	 */
-	public function getModel($name = 'Businesses', $prefix = 'SwapLocalModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Business', $prefix = 'SwapLocalModel', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 

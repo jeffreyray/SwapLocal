@@ -132,7 +132,7 @@ class SwapLocalModelCurrency extends JModelAdmin
 			$registry->loadString($item->metadata);
 			$item->metadata = $registry->toArray();
 
-			$item->currencytext = trim($item->fulltext) != '' ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
+			$item->articletext = trim($item->fulltext) != '' ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
 		}
 
 		return $item;
@@ -225,6 +225,14 @@ class SwapLocalModelCurrency extends JModelAdmin
 			list($title,$alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['title']);
 			$data['title']	= $title;
 			$data['alias']	= $alias;
+		}
+                
+
+		if (parent::save($data)) {
+			//if (isset($data['featured'])) {
+			//	$this->featured($this->getState($this->getName().'.id'), $data['featured']);
+			//}
+			return true;
 		}
 
 		return false;

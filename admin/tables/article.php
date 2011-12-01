@@ -12,26 +12,26 @@ defined('JPATH_PLATFORM') or die;
 jimport('joomla.database.tableasset');
 
 /**
- * Currency table
+ * Content table
  *
  * @package     Joomla.Platform
  * @subpackage  Table
  * @since       11.1
  */
-class SwapLocalTableCurrency extends JTable
+class JTableContent extends JTable
 {
 	/**
 	 * Constructor
 	 *
 	 * @param   database  &$db  A database connector object
 	 *
-	 * @return  JTableCurrency
+	 * @return  JTableContent
 	 *
 	 * @since   11.1
 	 */
 	function __construct(&$db)
 	{
-		parent::__construct('#__swaplocal_currencies', 'id', $db);
+		parent::__construct('#__content', 'id', $db);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class SwapLocalTableCurrency extends JTable
 	protected function _getAssetName()
 	{
 		$k = $this->_tbl_key;
-		return 'com_swaplocal.currency.'.(int) $this->$k;
+		return 'com_content.article.'.(int) $this->$k;
 	}
 
 	/**
@@ -77,7 +77,7 @@ class SwapLocalTableCurrency extends JTable
 		$assetId = null;
 		$db = $this->getDbo();
 
-		// This is a currency under a category.
+		// This is a article under a category.
 		if ($this->catid) {
 			// Build the query to get the asset id for the parent category.
 			$query	= $db->getQuery(true);
@@ -159,7 +159,7 @@ class SwapLocalTableCurrency extends JTable
 	public function check()
 	{
 		if (trim($this->title) == '') {
-			$this->setError(JText::_('COM_SWAPLOCAL_WARNING_PROVIDE_VALID_NAME'));
+			$this->setError(JText::_('COM_CONTENT_WARNING_PROVIDE_VALID_NAME'));
 			return false;
 		}
 
@@ -177,10 +177,10 @@ class SwapLocalTableCurrency extends JTable
 			$this->fulltext = '';
 		}
 
-		//if (trim($this->introtext) == '' && trim($this->fulltext) == '') {
-		//	$this->setError(JText::_('JGLOBAL_ARTICLE_MUST_HAVE_TEXT'));
-		//	return false;
-		//}
+		if (trim($this->introtext) == '' && trim($this->fulltext) == '') {
+			$this->setError(JText::_('JGLOBAL_ARTICLE_MUST_HAVE_TEXT'));
+			return false;
+		}
 
 		// Check the publish down date is not earlier than publish up.
 		if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up) {
@@ -230,7 +230,7 @@ class SwapLocalTableCurrency extends JTable
 			$this->modified		= $date->toMySQL();
 			$this->modified_by	= $user->get('id');
 		} else {
-			// New currency. An currency created and created_by field can be set by the user,
+			// New article. An article created and created_by field can be set by the user,
 			// so we don't touch either of these if they are set.
 			if (!intval($this->created)) {
 				$this->created = $date->toMySQL();
@@ -241,7 +241,7 @@ class SwapLocalTableCurrency extends JTable
 			}
 		}
 		// Verify that the alias is unique
-		$table = JTable::getInstance('Currency', 'SwapLocalTable');
+		$table = JTable::getInstance('Content', 'JTable');
 		if ($table->load(array('alias'=>$this->alias, 'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_ARTICLE_UNIQUE_ALIAS'));
 			return false;

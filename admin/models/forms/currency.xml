@@ -35,11 +35,6 @@
 				JTRASHED</option>
 		</field>
 
-		<field name="catid" type="category" extension="com_swaplocal"
-			label="JCATEGORY" description="JFIELD_CATEGORY_DESC"
-			class="inputbox" required="true"
-		>
-		</field>
 		<field
 			name="buttonspacer"
 			description="JGLOBAL_ACTION_PERMISSIONS_DESCRIPTION"

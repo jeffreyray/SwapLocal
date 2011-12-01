@@ -36,7 +36,7 @@ class SwapLocalModelCurrencies extends JModelList
 				'alias', 'a.alias',
 				'checked_out', 'a.checked_out',
 				'checked_out_time', 'a.checked_out_time',
-				'catid', 'a.catid', 'category_title',
+				//'catid', 'a.catid', 'category_title',
 				'state', 'a.state',
 				'access', 'a.access', 'access_level',
 				'created', 'a.created',
@@ -83,8 +83,8 @@ class SwapLocalModelCurrencies extends JModelList
 		$published = $this->getUserStateFromRequest($this->context.'.filter.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
-		$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
-		$this->setState('filter.category_id', $categoryId);
+		//$categoryId = $this->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
+		//$this->setState('filter.category_id', $categoryId);
 
 		$language = $this->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
 		$this->setState('filter.language', $language);
@@ -111,7 +111,7 @@ class SwapLocalModelCurrencies extends JModelList
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.published');
-		$id	.= ':'.$this->getState('filter.category_id');
+		//$id	.= ':'.$this->getState('filter.category_id');
 		$id	.= ':'.$this->getState('filter.author_id');
 		$id	.= ':'.$this->getState('filter.language');
 
@@ -135,7 +135,7 @@ class SwapLocalModelCurrencies extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid' .
+				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time' .
 				', a.state, a.access, a.created, a.created_by, a.ordering, a.language, a.hits' .
 				', a.publish_up, a.publish_down'
 			)
@@ -154,9 +154,9 @@ class SwapLocalModelCurrencies extends JModelList
 		$query->select('ag.title AS access_level');
 		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
 
-		// Join over the categories.
-		$query->select('c.title AS category_title');
-		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		//// Join over the categories.
+		//$query->select('c.title AS category_title');
+		//$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
 		// Join over the users for the author.
 		$query->select('ua.name AS author_name');
@@ -184,15 +184,15 @@ class SwapLocalModelCurrencies extends JModelList
 		}
 
 		// Filter by a single or group of categories.
-		$categoryId = $this->getState('filter.category_id');
-		if (is_numeric($categoryId)) {
-			$query->where('a.catid = '.(int) $categoryId);
-		}
-		elseif (is_array($categoryId)) {
-			JArrayHelper::toInteger($categoryId);
-			$categoryId = implode(',', $categoryId);
-			$query->where('a.catid IN ('.$categoryId.')');
-		}
+		//$categoryId = $this->getState('filter.category_id');
+		//if (is_numeric($categoryId)) {
+		//	$query->where('a.catid = '.(int) $categoryId);
+		//}
+		//elseif (is_array($categoryId)) {
+		//	JArrayHelper::toInteger($categoryId);
+		//	$categoryId = implode(',', $categoryId);
+		//	$query->where('a.catid IN ('.$categoryId.')');
+		//}
 
 		// Filter by author
 		$authorId = $this->getState('filter.author_id');
@@ -225,8 +225,8 @@ class SwapLocalModelCurrencies extends JModelList
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering');
 		$orderDirn	= $this->state->get('list.direction');
-		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
-			$orderCol = 'category_title '.$orderDirn.', a.ordering';
+		if ($orderCol == 'a.ordering' ) {
+			$orderCol = $orderDirn.', a.ordering';
 		}
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 

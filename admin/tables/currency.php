@@ -78,19 +78,19 @@ class SwapLocalTableCurrency extends JTable
 		$db = $this->getDbo();
 
 		// This is a currency under a category.
-		if ($this->catid) {
-			// Build the query to get the asset id for the parent category.
-			$query	= $db->getQuery(true);
-			$query->select('asset_id');
-			$query->from('#__categories');
-			$query->where('id = '.(int) $this->catid);
-
-			// Get the asset id from the database.
-			$this->_db->setQuery($query);
-			if ($result = $this->_db->loadResult()) {
-				$assetId = (int) $result;
-			}
-		}
+		//if ($this->catid) {
+		//	// Build the query to get the asset id for the parent category.
+		//	$query	= $db->getQuery(true);
+		//	$query->select('asset_id');
+		//	$query->from('#__categories');
+		//	$query->where('id = '.(int) $this->catid);
+		//
+		//	// Get the asset id from the database.
+		//	$this->_db->setQuery($query);
+		//	if ($result = $this->_db->loadResult()) {
+		//		$assetId = (int) $result;
+		//	}
+		//}
 
 		// Return the asset id.
 		if ($assetId) {
@@ -242,7 +242,7 @@ class SwapLocalTableCurrency extends JTable
 		}
 		// Verify that the alias is unique
 		$table = JTable::getInstance('Currency', 'SwapLocalTable');
-		if ($table->load(array('alias'=>$this->alias, 'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
+		if ($table->load(array('alias'=>$this->alias)) && ($table->id != $this->id || $this->id==0)) {
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_ARTICLE_UNIQUE_ALIAS'));
 			return false;
 		}
@@ -343,20 +343,13 @@ class SwapLocalTableCurrency extends JTable
 
 		if ($mapKeysToText) {
 			$query = 'SELECT name'
-				. ' FROM #__categories'
-				. ' WHERE id = '. (int) $this->catid
-			;
-			$db->setQuery($query);
-			$this->catid = $db->loadResult();
-
-			$query = 'SELECT name'
 				. ' FROM #__users'
 				. ' WHERE id = ' . (int) $this->created_by
 			;
 			$db->setQuery($query);
 			$this->created_by = $db->loadResult();
 		}
-
+                
 		return parent::toXML($mapKeysToText);
 	}
 }

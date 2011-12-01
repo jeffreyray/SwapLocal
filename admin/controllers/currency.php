@@ -10,26 +10,26 @@ class SwapLocalControllerCurrency extends JControllerForm
 		parent::__construct($config);
 	}
 
-	protected function allowAdd($data = array())
-	{
-		// Initialise variables.
-		$user		= JFactory::getUser();
-		$categoryId	= JArrayHelper::getValue($data, 'catid', JRequest::getInt('filter_category_id'), 'int');
-		$allow		= null;
-
-		if ($categoryId) {
-			// If the category has been passed in the data or URL check it.
-			$allow	= $user->authorise('core.create', 'com_swaplocal.category.'.$categoryId);
-		}
-
-		if ($allow === null) {
-			// In the absense of better information, revert to the component permissions.
-			return parent::allowAdd();
-		}
-		else {
-			return $allow;
-		}
-	}
+	//protected function allowAdd($data = array())
+	//{
+	//	// Initialise variables.
+	//	$user		= JFactory::getUser();
+	//	$categoryId	= JArrayHelper::getValue($data, 'catid', JRequest::getInt('filter_category_id'), 'int');
+	//	$allow		= null;
+	//
+	//	if ($categoryId) {
+	//		// If the category has been passed in the data or URL check it.
+	//		$allow	= $user->authorise('core.create', 'com_swaplocal.category.'.$categoryId);
+	//	}
+	//
+	//	if ($allow === null) {
+	//		// In the absense of better information, revert to the component permissions.
+	//		return parent::allowAdd();
+	//	}
+	//	else {
+	//		return $allow;
+	//	}
+	//}
 
 	/**
 	 * Method override to check if you can edit an existing record.

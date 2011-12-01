@@ -13,7 +13,6 @@ CREATE TABLE `#__swaplocal` (
   `state` tinyint(3) NOT NULL default '0',
   `sectionid` int(10) unsigned NOT NULL default '0',
   `mask` int(10) unsigned NOT NULL default '0',
-  `catid` int(10) unsigned NOT NULL default '0',
   `created` datetime NOT NULL default '0000-00-00 00:00:00',
   `created_by` int(10) unsigned NOT NULL default '0',
   `created_by_alias` varchar(255) NOT NULL default '',
